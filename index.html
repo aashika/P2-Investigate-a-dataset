@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Investigate-a-dataset by aashika</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Investigate-a-dataset</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/aashika/Investigate-a-dataset" class="btn">View on GitHub</a>
+      <a href="https://github.com/aashika/Investigate-a-dataset/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/aashika/Investigate-a-dataset/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="investigate-a-dataset" class="anchor" href="#investigate-a-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>Investigate-a-dataset</h1>
+
+<p>This project is an investigation of the Titanic passenger dataset using NumPy and Pandas. It illustrates the entire data analysis process, from posing the relevant questions to finishing by sharing my findings on the same.</p>
+
+<h2 id="1.-Dataset-chosen-for-analysis:-Titanic-Dataset">
+<a id="1-dataset-chosen-for-analysis-titanic-dataset" class="anchor" href="#1-dataset-chosen-for-analysis-titanic-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Dataset chosen for analysis: Titanic Dataset</h2>
+
+<p>
+
+</p>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>It contains demographics and passenger information of the passengers and crew on board the Titanic.</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="2.-Questions-posed">
+<a id="2-questions-posed" class="anchor" href="#2-questions-posed" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Questions posed<a href="#2.-Questions-posed"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>Q1. What factors made people more likely to survive?
+(Factors like: age, sex, and class can be analyzed.)
+To what extent each factor affected the survival?</p>
+<p>Q2. Did passengers that traveled alone have a higher chance of survival than passengers that traveled as a family?</p>
+<p>Q3. Does passengers' cabin location help to predict survival?</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="3.-Description-of-the-Dataset">
+<a id="3-description-of-the-dataset" class="anchor" href="#3-description-of-the-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Description of the Dataset<a href="#3.-Description-of-the-Dataset"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>titanic_data.csv:</p>
+<p>Contains passenger information for passengerids 1-891:</p>
+
+<pre><code>PassengerId --&gt; A unique identifier for the passenger 
+Survived --&gt; returns 1 if the passenger survived ,else return 0
+Pclass --&gt; Pclass is a proxy for socio-economic status (SES)
+           1st ~ Upper; 2nd ~ Middle; 3rd ~ Lower
+Name 
+Sex
+Age
+SibSp and Parch --&gt; With respect to the family relation variables (i.e. sibsp and parch)
+                    some relations were ignored.  The following are the definitions used
+                    for sibsp and parch.
+
+                    Sibling:  Brother, Sister, Stepbrother, or Stepsister of Passenger Aboard Titanic
+                    Spouse:   Husband or Wife of Passenger Aboard Titanic (Mistresses and Fiances Ignored)
+                    Parent:   Mother or Father of Passenger Aboard Titanic
+                    Child:    Son, Daughter, Stepson, or Stepdaughter of Passenger Aboard Titanic
+Ticket --&gt;  Ticket Number
+Fare --&gt; fare            Passenger Fare
+Cabin 
+Embarked --&gt; embarked        Port of Embarkation
+            (C = Cherbourg; Q = Queenstown; S = Southampton)</code></pre>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="4.-Observations-from-the-cursory-analysis-of-the-dataset">
+<a id="4-observations-from-the-cursory-analysis-of-the-dataset" class="anchor" href="#4-observations-from-the-cursory-analysis-of-the-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Observations from the cursory analysis of the dataset<a href="#4.-Observations-from-the-cursory-analysis-of-the-dataset"></a>
+</h2>
+<p>A lot of entries in the files are missing: The passenger cabin location data is largely missing which makes answering the third question:  Does passengers' cabins location help to predict survival? really difficult. However, the entries:  sex, age, pclass, sibsp and Parch are available. So, the first two questions:  What factors made people more likely to survive?
+(Factors like: age, sex, and class can be analyzed.)
+To what extent each factor affected the survival? and Did passengers that traveled alone have a higher chance of survival than passengers that traveled as a family? can be analyzed</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="5.-Loading-the-data-in-Python">
+<a id="5-loading-the-data-in-python" class="anchor" href="#5-loading-the-data-in-python" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Loading the data in Python<a href="#5.-Loading-the-data-in-Python"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [4]:</div>
+<div>
+    <div>
+<div><pre>##Loading the data into dataframes
+##Edit the path of the file before running the code
+
+import pandas as pd
+
+passengerinfo_file='C:/Users/Aashika/Desktop/DA Udacity/P2/Titanic Analysis/titanic_data.csv'
+passengerinfo = pd.read_csv(passengerinfo_file)
+passengerinfo
+                                      
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+<p>891 rows × 12 columns</p>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+
+<p>
+</p>
+
+<p></p>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-data-in-titanic_data.csv-contains-information-about-891-passengers.-There-are-a-lot-of-entries-missing-in-the-columns-age-and-Cabin.">
+<a id="the-data-in-titanic_datacsv-contains-information-about-891-passengers-there-are-a-lot-of-entries-missing-in-the-columns-age-and-cabin" class="anchor" href="#the-data-in-titanic_datacsv-contains-information-about-891-passengers-there-are-a-lot-of-entries-missing-in-the-columns-age-and-cabin" aria-hidden="true"><span class="octicon octicon-link"></span></a>The data in titanic_data.csv contains information about 891 passengers. There are a lot of entries missing in the columns age and Cabin.<a href="#The-data-in-titanic_data.csv-contains-information-about-891-passengers.-There-are-a-lot-of-entries-missing-in-the-columns-age-and-Cabin."></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [5]:</div>
+<div>
+    <div>
+<div><pre># Used to drop entries that have missing data
+passengerinfo.dropna()
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+
+<p>183 rows × 12 columns</p>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+
+<p>
+</p>
+
+<p></p>
+
+<div>
+<div>
+<div>In [6]:</div>
+<div>
+    <div>
+<div><pre>len(passengerinfo.dropna())
+
+##Finding percentage of missing data
+
+percent_misssing_data =100- len(passengerinfo.dropna())*1.0/len(passengerinfo)* 100
+print percent_misssing_data
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>79.4612794613
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="79.46-percent-of-the-records-have-some-missing-entries,-all-these-records-cannot-be-removed--just-because-some-entries-are-missing.">
+<a id="7946-percent-of-the-records-have-some-missing-entries-all-these-records-cannot-be-removed--just-because-some-entries-are-missing" class="anchor" href="#7946-percent-of-the-records-have-some-missing-entries-all-these-records-cannot-be-removed--just-because-some-entries-are-missing" aria-hidden="true"><span class="octicon octicon-link"></span></a>79.46 percent of the records have some missing entries, all these records cannot be removed  just because some entries are missing.<a href="#79.46-percent-of-the-records-have-some-missing-entries,-all-these-records-cannot-be-removed--just-because-some-entries-are-missing."></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="6.-General-Statistics">
+<a id="6-general-statistics" class="anchor" href="#6-general-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. General Statistics<a href="#6.-General-Statistics"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [7]:</div>
+<div>
+    <div>
+<div><pre>passengerinfo.describe()
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[7]:</div>
+
+<div>
+<div>
+<table border="1">
+  <thead>
+    <tr>
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>714.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+      <td>891.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>446.000000</td>
+      <td>0.383838</td>
+      <td>2.308642</td>
+      <td>29.699118</td>
+      <td>0.523008</td>
+      <td>0.381594</td>
+      <td>32.204208</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>257.353842</td>
+      <td>0.486592</td>
+      <td>0.836071</td>
+      <td>14.526497</td>
+      <td>1.102743</td>
+      <td>0.806057</td>
+      <td>49.693429</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.420000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>223.500000</td>
+      <td>0.000000</td>
+      <td>2.000000</td>
+      <td>20.125000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>7.910400</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>446.000000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>28.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>14.454200</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>668.500000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>38.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>31.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>891.000000</td>
+      <td>1.000000</td>
+      <td>3.000000</td>
+      <td>80.000000</td>
+      <td>8.000000</td>
+      <td>6.000000</td>
+      <td>512.329200</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-above-table-gives-general-data-about-the-data-columns.">
+<a id="the-above-table-gives-general-data-about-the-data-columns" class="anchor" href="#the-above-table-gives-general-data-about-the-data-columns" aria-hidden="true"><span class="octicon octicon-link"></span></a>The above table gives general data about the data columns.<a href="#The-above-table-gives-general-data-about-the-data-columns."></a>
+</h3>
+<pre><code>We can gather bits of information like:
+
+</code></pre>
+<ol>
+<li>The most aged passenger was 80 years old.</li>
+<li>The highest fare taken to board the RMS Titanic was $512.32920.</li>
+<li>The average age of the passenger aboard the RMS Titanic was 29.69 years.</li>
+<li>The mean survival stat was 0.3838 where 1='Survived' and 0='Not Survived',</li>
+<li>The youngest passenger was barely 5 months old.</li>
+</ol>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="7.-Is-the-survival-rate-affected-by-sex?">
+<a id="7-is-the-survival-rate-affected-by-sex" class="anchor" href="#7-is-the-survival-rate-affected-by-sex" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Is the survival rate affected by sex?<a href="#7.-Is-the-survival-rate-affected-by-sex?"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [8]:</div>
+<div>
+    <div>
+<div><pre>##Finding the number of male and female passengers
+
+print len(passengerinfo[passengerinfo['Sex'] == 'female'])
+print len(passengerinfo[passengerinfo['Sex'] == 'male'])
+
+##Finding the percentage of male and female passengers
+
+percent_female = 314.0/891*100
+percent_male = 577.0/891*100
+print percent_female
+print percent_male
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>314
+577
+35.241301908
+64.758698092
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [40]:</div>
+<div>
+    <div>
+<div><pre>##Plotting the number of male and female passengers
+
+import numpy as np
+import matplotlib.pyplot as plt
+%pylab inline
+
+def plotbar(data1, data2, title, c1, c2, n, l1,l2): 
+    n_groups = 1
+    means_men = (data1)
+    means_women = (data2)
+
+    fig, ax = plt.subplots()
+
+    index = np.arange(n_groups)
+    bar_width = 0.3
+
+    opacity = 0.7
+    error_config = {'ecolor': '0.3'}
+
+    rects1 = plt.bar(index, means_men, bar_width,
+                     alpha=opacity,
+                     color=c1,
+                     yerr=0,
+                     error_kw=error_config,
+                     label=l1)
+
+    rects2 = plt.bar(index +0.5 + bar_width, means_women, bar_width,
+                     alpha=opacity,
+                     color=c2,
+                     yerr=0,
+                     error_kw=error_config,
+                     label=l2)
+
+    plt.xlabel('')
+    plt.ylabel('Percentages')
+    plt.title(title)
+    plt.xticks(index + bar_width, (''))
+    plt.legend()
+    plt.yticks(n)
+
+    plt.tight_layout()
+    plt.show()
+    
+plotbar(percent_male, percent_female,'Percentage of male and female passengers','b','y',np.arange(0, 80, 10), 'Men', 'Women')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div></div>
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="35.24%-of-the-passengers-are-female-whereas-the-rest-of-the-64.75%-are-males">
+<a id="3524-of-the-passengers-are-female-whereas-the-rest-of-the-6475-are-males" class="anchor" href="#3524-of-the-passengers-are-female-whereas-the-rest-of-the-6475-are-males" aria-hidden="true"><span class="octicon octicon-link"></span></a>35.24% of the passengers are female whereas the rest of the 64.75% are males<a href="#35.24%-of-the-passengers-are-female-whereas-the-rest-of-the-64.75%-are-males"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [10]:</div>
+<div>
+    <div>
+<div><pre>##Finding the number of female passengers who survived/did not survive
+
+print len(passengerinfo[(passengerinfo['Survived'] == 1) &amp;  (passengerinfo['Sex'] == "female")])
+print len(passengerinfo[(passengerinfo['Survived'] == 0) &amp;  (passengerinfo['Sex'] == "female")])
+
+##Finding the percentage of female passengers who survived/did not survive
+
+percent_female_survived = 233/314.0*100
+percent_female_notsurvived = 81/314.0*100
+print percent_female_survived
+print percent_female_notsurvived
+
+##Finding the percentage of male passengers who survived/did not survive
+
+print len(passengerinfo[(passengerinfo['Survived'] == 1) &amp;  (passengerinfo['Sex'] == "male")])
+print len(passengerinfo[(passengerinfo['Survived'] == 0) &amp;  (passengerinfo['Sex'] == "male")])
+
+##Finding the percentage of female passengers who survived/did not survive
+
+percent_male_survived = 109/577.0*100
+percent_male_notsurvived = 468/577.0*100
+print percent_male_survived
+print percent_male_notsurvived
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>233
+81
+74.2038216561
+25.7961783439
+109
+468
+18.8908145581
+81.1091854419
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [41]:</div>
+<div>
+    <div>
+<div><pre>##Plotting the percentages of surviving males and females
+
+plotbar(percent_male_survived, percent_female_survived, 'Percentage of male and female passengers who survived','r','b',np.arange(0, 120, 10),'Men', 'Women')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="Out-of-the-total-577-male-passengers-only-109-survived.-The-survival-rate-of-male-passenger-was-less-than-20%.Out-of-the-total-314-female-passengers-233-survived.-The-survival-rate-of-the-female-passenger-was-upto-74%">
+<a id="out-of-the-total-577-male-passengers-only-109-survived-the-survival-rate-of-male-passenger-was-less-than-20out-of-the-total-314-female-passengers-233-survived-the-survival-rate-of-the-female-passenger-was-upto-74" class="anchor" href="#out-of-the-total-577-male-passengers-only-109-survived-the-survival-rate-of-male-passenger-was-less-than-20out-of-the-total-314-female-passengers-233-survived-the-survival-rate-of-the-female-passenger-was-upto-74" aria-hidden="true"><span class="octicon octicon-link"></span></a>Out of the total 577 male passengers only 109 survived. The survival rate of male passenger was less than 20%.Out of the total 314 female passengers 233 survived. The survival rate of the female passenger was upto 74%<a href="#Out-of-the-total-577-male-passengers-only-109-survived.-The-survival-rate-of-male-passenger-was-less-than-20%.Out-of-the-total-314-female-passengers-233-survived.-The-survival-rate-of-the-female-passenger-was-upto-74%"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="'First-of-all,-if-you-were-a-man,-you-were-outta-luck.-The-overall-survival-rate-for-men-was-20%.-For-women,-it-was-74%,-and-for-children,-52%.-Yes,-it-was-indeed-&quot;women-and-children-first.&quot;'-(Quoted-from-http://www.anesi.com/titanic.htm)">
+<a id="first-of-all-if-you-were-a-man-you-were-outta-luck-the-overall-survival-rate-for-men-was-20-for-women-it-was-74-and-for-children-52-yes-it-was-indeed-women-and-children-first-quoted-from-httpwwwanesicomtitanichtm" class="anchor" href="#first-of-all-if-you-were-a-man-you-were-outta-luck-the-overall-survival-rate-for-men-was-20-for-women-it-was-74-and-for-children-52-yes-it-was-indeed-women-and-children-first-quoted-from-httpwwwanesicomtitanichtm" aria-hidden="true"><span class="octicon octicon-link"></span></a>'First of all, if you were a man, you were outta luck. The overall survival rate for men was 20%. For women, it was 74%, and for children, 52%. Yes, it was indeed "women and children first."' (Quoted from <a href="http://www.anesi.com/titanic.htm">http://www.anesi.com/titanic.htm</a>)</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-survival-rate-of-a-female-passenger-is-much-higher-than-the-survival-rate-of-the-male-passenger">
+<a id="the-survival-rate-of-a-female-passenger-is-much-higher-than-the-survival-rate-of-the-male-passenger" class="anchor" href="#the-survival-rate-of-a-female-passenger-is-much-higher-than-the-survival-rate-of-the-male-passenger" aria-hidden="true"><span class="octicon octicon-link"></span></a>The survival rate of a female passenger is much higher than the survival rate of the male passenger<a href="#The-survival-rate-of-a-female-passenger-is-much-higher-than-the-survival-rate-of-the-male-passenger"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="8.-Is-the-survival-rate-affected-by-age?">
+<a id="8-is-the-survival-rate-affected-by-age" class="anchor" href="#8-is-the-survival-rate-affected-by-age" aria-hidden="true"><span class="octicon octicon-link"></span></a>8. Is the survival rate affected by age?<a href="#8.-Is-the-survival-rate-affected-by-age?"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [12]:</div>
+<div>
+    <div>
+<div><pre>##Finding the number of children and adults who survived
+
+num_of_children= len(passengerinfo[passengerinfo['Age'] &lt; 18])
+num_of_adults= len(passengerinfo[passengerinfo['Age'] &gt;= 18])
+num_of_children_who_survived= len(passengerinfo[(passengerinfo['Age'] &lt; 18) &amp; (passengerinfo['Survived'] == 1)])
+num_of_adults_who_survived= len(passengerinfo[(passengerinfo['Age'] &gt;= 18) &amp; (passengerinfo['Survived'] == 1)])
+
+print num_of_children
+print num_of_adults
+print num_of_children_who_survived
+print num_of_adults_who_survived
+
+##Finding percentages of children and adults who survived
+
+percent_children_who_survived = num_of_children_who_survived*1.0/num_of_children * 100
+percent_adults_who_survived = num_of_adults_who_survived*1.0/num_of_adults * 100
+
+print percent_children_who_survived
+print percent_adults_who_survived
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>113
+601
+61
+229
+53.982300885
+38.1031613977
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [42]:</div>
+<div>
+    <div>
+<div><pre>##Plotting the percentages of children and adults who survived
+
+plotbar(percent_children_who_survived, percent_adults_who_survived, 'Percentage of children and adults who survived','b','g',np.arange(0, 70, 10),'Children','Adults')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="Correlation-check">
+<a id="correlation-check" class="anchor" href="#correlation-check" aria-hidden="true"><span class="octicon octicon-link"></span></a>Correlation check<a href="#Correlation-check"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [14]:</div>
+<div>
+    <div>
+<div><pre>##Correlation coefficient
+
+def correlation(x, y):
+    std_x=(x-x.mean())/x.std(ddof=0)
+    std_y=(y-y.mean())/y.std(ddof=0)
+        
+    return (std_x*std_y).mean()
+        
+age = passengerinfo['Age']
+survived=passengerinfo['Survived']
+
+print correlation(age, survived)
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>-0.0779826784139
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>The correlation check indicates that lesser number of adults survived as compared to children</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="53.98-percent-of-the-children-aboard-RMS-titanic-survived-whereas-only-38.10-percent-adults-made-it.-The-percentage-of-children-who-survived-is-relatively-greater.">
+<a id="5398-percent-of-the-children-aboard-rms-titanic-survived-whereas-only-3810-percent-adults-made-it-the-percentage-of-children-who-survived-is-relatively-greater" class="anchor" href="#5398-percent-of-the-children-aboard-rms-titanic-survived-whereas-only-3810-percent-adults-made-it-the-percentage-of-children-who-survived-is-relatively-greater" aria-hidden="true"><span class="octicon octicon-link"></span></a>53.98 percent of the children aboard RMS titanic survived whereas only 38.10 percent adults made it. The percentage of children who survived is relatively greater.<a href="#53.98-percent-of-the-children-aboard-RMS-titanic-survived-whereas-only-38.10-percent-adults-made-it.-The-percentage-of-children-who-survived-is-relatively-greater."></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [17]:</div>
+<div>
+    <div>
+<div><pre>##Plotting the age vs. mean survival value 
+
+import seaborn as sns
+
+fig, axis1 = plt.subplots(1,1,figsize=(20,4))
+average_age = passengerinfo[["Age", "Survived"]].groupby(['Age'],as_index=False).mean()
+sns.barplot(x='Age', y='Survived', data=average_age)
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[17]:</div>
+
+
+<div>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0xc2d3e48&gt;</pre>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div></div>
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>In statistics, the Mann–Whitney U test is a nonparametric test of the null hypothesis that two samples come from the same population against an alternative hypothesis, especially that a particular population tends to have larger values than the other.</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [45]:</div>
+<div>
+    <div>
+<div><pre>##Employing Mann–Whitney U test
+
+import scipy
+import scipy.stats
+
+
+def mann_whitney_test_means(a):
+    survive = passengerinfo[passengerinfo.Survived == 1][a]
+    not_survive = passengerinfo[passengerinfo.Survived == 0][a]
+    survive_mean = np.mean(survive)
+    not_survive_mean = np.mean(not_survive)
+    U,p = scipy.stats.mannwhitneyu(survive,not_survive)
+    return survive_mean, not_survive_mean, U, p
+
+mann_whitney_test_means('Age')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[45]:</div>
+
+
+<div>
+<pre>(28.343689655172415, 30.62617924528302, 81592.0, 0.00050215422146319716)</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>Result:</p>
+<p>P-value: 0.00050215422146319716</p>
+<p>Its less than 0.05. This means that the null hypothesis that the mean age of survivors is equal to mean age of victims is rejected.The mean age of a survivor is lesser than that of a victim</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-survival-rate-of-a-child-is-much-higher-than-the-survival-rate-of-an-adult">
+<a id="the-survival-rate-of-a-child-is-much-higher-than-the-survival-rate-of-an-adult" class="anchor" href="#the-survival-rate-of-a-child-is-much-higher-than-the-survival-rate-of-an-adult" aria-hidden="true"><span class="octicon octicon-link"></span></a>The survival rate of a child is much higher than the survival rate of an adult<a href="#The-survival-rate-of-a-child-is-much-higher-than-the-survival-rate-of-an-adult"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="9.-Is-the-survival-rate-affected-by-class?">
+<a id="9-is-the-survival-rate-affected-by-class" class="anchor" href="#9-is-the-survival-rate-affected-by-class" aria-hidden="true"><span class="octicon octicon-link"></span></a>9. Is the survival rate affected by class?<a href="#9.-Is-the-survival-rate-affected-by-class?"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [19]:</div>
+<div>
+    <div>
+<div><pre>##Finding the number of passengers belonging to first, second and third class
+
+num_of_fclass= len(passengerinfo[passengerinfo['Pclass'] ==1])
+num_of_sclass= len(passengerinfo[passengerinfo['Pclass'] ==2])
+num_of_tclass= len(passengerinfo[passengerinfo['Pclass'] ==3])
+
+##Finding the number of passengers belonging to first, second and third class who did survive/did not survive
+
+num_of_fclass_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 1) &amp; (passengerinfo['Survived'] == 1)])
+num_of_sclass_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 2) &amp; (passengerinfo['Survived'] == 1)])
+num_of_tclass_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 3) &amp; (passengerinfo['Survived'] == 1)])
+
+num_of_fclass_who_dintsurvive= num_of_fclass-num_of_fclass_who_survived
+num_of_sclass_who_dintsurvive= num_of_sclass-num_of_sclass_who_survived 
+num_of_tclass_who_dintsurvive= num_of_tclass-num_of_tclass_who_survived
+
+print num_of_fclass
+print num_of_sclass
+print num_of_tclass
+print num_of_fclass_who_survived
+print num_of_sclass_who_survived
+print num_of_tclass_who_survived
+print num_of_fclass_who_dintsurvive 
+print num_of_sclass_who_dintsurvive
+print num_of_tclass_who_dintsurvive
+
+##Finding percentages of people belonging to the first, second, third class who did/did not survive
+
+percent_fclass_who_survived = num_of_fclass_who_survived*1.0/num_of_fclass * 100
+percent_sclass_who_survived = num_of_sclass_who_survived*1.0/num_of_sclass * 100
+percent_tclass_who_survived = num_of_tclass_who_survived*1.0/num_of_tclass * 100
+
+print percent_fclass_who_survived
+print percent_sclass_who_survived
+print percent_tclass_who_survived
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>216
+184
+491
+136
+87
+119
+80
+97
+372
+62.962962963
+47.2826086957
+24.2362525458
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [20]:</div>
+<div>
+    <div>
+<div><pre>##Plotting percentages of people belonging to the first, second, third class who did/did not survive
+
+#!/usr/bin/env python
+# a stacked bar plot with errorbars
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+N = 3
+survivedMeans = (num_of_fclass_who_survived, num_of_sclass_who_survived, num_of_tclass_who_survived)
+notsurvivedMeans = (num_of_fclass_who_dintsurvive, num_of_sclass_who_dintsurvive, num_of_tclass_who_dintsurvive)
+
+ind = np.arange(N)    # the x locations for the groups
+width = 0.35       # the width of the bars: can also be len(x) sequence
+
+p1 = plt.bar(ind, survivedMeans, width, color='y')
+p2 = plt.bar(ind, notsurvivedMeans, width, color='b',
+             bottom=survivedMeans)
+
+plt.ylabel('Number of Passengers')
+plt.title('Survival Stats by class')
+plt.xticks(ind + width/2., ('1st Class', '2nd Class', '3rd Class'))
+plt.yticks(np.arange(0, 800, 50))
+plt.legend((p1[0], p2[0]), ('Survived', 'Did not Survive'))
+
+plt.show()
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [30]:</div>
+<div>
+    <div>
+<div><pre>##Correlation coefficient
+
+pclass = passengerinfo['Pclass']
+
+print correlation(pclass, survived)
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>-0.338481035961
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>The correlation check shows that lesser number of third class passengers survived as compared to the second class and lessser number of second class pasengers survived as compared to the third class passengers</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [46]:</div>
+<div>
+    <div>
+<div><pre>##Employing Mann–Whitney U test
+
+mann_whitney_test_means('Pclass')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[46]:</div>
+
+
+<div>
+<pre>(1.9502923976608186, 2.5318761384335153, 59816.5, 1.9693873017803183e-24)</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>Result:</p>
+<p>P-value: 1.9693873017803183e-24</p>
+<p>Its less than 0.05. This means that the null hypothesis that is rejected. More survivors belong to the first class as compared to the second, and more survivors belong to the second class as compared to the third.</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="62.96-percent-of-the-1st-class-passengers-survived-whereas,-47.28-percent-of-the-2nd-class-passengers-survived-and-only-24.23-percent-of-the-3rd-class-passengers-survived">
+<a id="6296-percent-of-the-1st-class-passengers-survived-whereas-4728-percent-of-the-2nd-class-passengers-survived-and-only-2423-percent-of-the-3rd-class-passengers-survived" class="anchor" href="#6296-percent-of-the-1st-class-passengers-survived-whereas-4728-percent-of-the-2nd-class-passengers-survived-and-only-2423-percent-of-the-3rd-class-passengers-survived" aria-hidden="true"><span class="octicon octicon-link"></span></a>62.96 percent of the 1st class passengers survived whereas, 47.28 percent of the 2nd class passengers survived and only 24.23 percent of the 3rd class passengers survived<a href="#62.96-percent-of-the-1st-class-passengers-survived-whereas,-47.28-percent-of-the-2nd-class-passengers-survived-and-only-24.23-percent-of-the-3rd-class-passengers-survived"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-survival-rate-of-a-first-class-passenger-is-much-higher-than-the-survival-rate-of-the-second-class-passenger,-and-the-survival-rate-of-a-second-class-passenger-is-much-higher-than-the-survival-rate-of-a-third-class-passenger">
+<a id="the-survival-rate-of-a-first-class-passenger-is-much-higher-than-the-survival-rate-of-the-second-class-passenger-and-the-survival-rate-of-a-second-class-passenger-is-much-higher-than-the-survival-rate-of-a-third-class-passenger" class="anchor" href="#the-survival-rate-of-a-first-class-passenger-is-much-higher-than-the-survival-rate-of-the-second-class-passenger-and-the-survival-rate-of-a-second-class-passenger-is-much-higher-than-the-survival-rate-of-a-third-class-passenger" aria-hidden="true"><span class="octicon octicon-link"></span></a>The survival rate of a first class passenger is much higher than the survival rate of the second class passenger, and the survival rate of a second class passenger is much higher than the survival rate of a third class passenger<a href="#The-survival-rate-of-a-first-class-passenger-is-much-higher-than-the-survival-rate-of-the-second-class-passenger,-and-the-survival-rate-of-a-second-class-passenger-is-much-higher-than-the-survival-rate-of-a-third-class-passenger"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="10.-Relationship-between-Class,-Sex-and-rate-of-survival">
+<a id="10-relationship-between-class-sex-and-rate-of-survival" class="anchor" href="#10-relationship-between-class-sex-and-rate-of-survival" aria-hidden="true"><span class="octicon octicon-link"></span></a>10. Relationship between Class, Sex and rate of survival<a href="#10.-Relationship-between-Class,-Sex-and-rate-of-survival"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [21]:</div>
+<div>
+    <div>
+<div><pre>##Finding number of males, females belonging to different classes 
+
+num_of_fclass_female= len(passengerinfo[(passengerinfo['Pclass'] ==1) &amp; (passengerinfo['Sex'] == "female")])
+num_of_fclass_male= len(passengerinfo[(passengerinfo['Pclass'] ==1) &amp; (passengerinfo['Sex'] == "male")])
+num_of_sclass_female= len(passengerinfo[(passengerinfo['Pclass'] ==2) &amp; (passengerinfo['Sex'] == "female")])
+num_of_sclass_male= len(passengerinfo[(passengerinfo['Pclass'] ==2) &amp; (passengerinfo['Sex'] == "male")])
+num_of_tclass_female= len(passengerinfo[(passengerinfo['Pclass'] ==3) &amp; (passengerinfo['Sex'] == "female")])
+num_of_tclass_male= len(passengerinfo[(passengerinfo['Pclass'] ==3) &amp; (passengerinfo['Sex'] == "male")])
+
+num_of_fclass_female_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 1) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="female")])
+num_of_fclass_male_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 1) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="male")])
+num_of_sclass_female_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 2) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="female")])
+num_of_sclass_male_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 2) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="male")])
+num_of_tclass_female_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 3) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="female")])
+num_of_tclass_male_who_survived= len(passengerinfo[(passengerinfo['Pclass'] == 3) &amp; (passengerinfo['Survived'] == 1) &amp; (passengerinfo['Sex']=="male")])
+
+##Finding percentages of males, females belonging to different classes 
+
+percent_fclass_female= num_of_fclass_female_who_survived*1.0/num_of_fclass_female*100
+percent_fclass_male= num_of_fclass_male_who_survived*1.0/num_of_fclass_male*100
+percent_sclass_female= num_of_sclass_female_who_survived*1.0/num_of_sclass_female*100
+percent_sclass_male= num_of_sclass_male_who_survived*1.0/num_of_sclass_male*100
+percent_tclass_female= num_of_tclass_female_who_survived*1.0/num_of_tclass_female*100
+percent_tclass_male= num_of_tclass_male_who_survived*1.0/num_of_tclass_male*100
+
+print percent_fclass_female
+print percent_fclass_male
+print percent_sclass_female
+print percent_sclass_male
+print percent_tclass_female
+print percent_tclass_male
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>96.8085106383
+36.8852459016
+92.1052631579
+15.7407407407
+50.0
+13.5446685879
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [22]:</div>
+<div>
+    <div>
+<div><pre>##Plotting percentages of males, females belonging to different classes 
+
+import numpy as np
+import matplotlib.pyplot as plt
+%pylab inline
+
+
+n_groups = 3
+
+means_men = (percent_fclass_male, percent_sclass_male, percent_tclass_male)
+
+means_women = (percent_fclass_female, percent_sclass_female, percent_tclass_female)
+
+
+fig, ax = plt.subplots()
+
+index = np.arange(n_groups)
+bar_width = 0.35
+
+opacity = 0.7
+error_config = {'ecolor': '0.3'}
+
+rects1 = plt.bar(index, means_men, bar_width,
+                 alpha=opacity,
+                 color='y',
+                 yerr=0,
+                 error_kw=error_config,
+                 label='Men')
+
+rects2 = plt.bar(index + bar_width, means_women, bar_width,
+                 alpha=opacity,
+                 color='g',
+                 yerr=0,
+                 error_kw=error_config,
+                 label='Women')
+
+plt.xlabel('Class')
+plt.ylabel('Percentages')
+plt.title('Percentage of men and women who survived')
+plt.xticks(index + bar_width, ('First Class', 'Second Class', 'Third Class'))
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>Populating the interactive namespace from numpy and matplotlib
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div></div>
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-graph-shows-the-percentage-of-men-and-women-through-different-classes-who-survived">
+<a id="the-graph-shows-the-percentage-of-men-and-women-through-different-classes-who-survived" class="anchor" href="#the-graph-shows-the-percentage-of-men-and-women-through-different-classes-who-survived" aria-hidden="true"><span class="octicon octicon-link"></span></a>The graph shows the percentage of men and women through different classes who survived<a href="#The-graph-shows-the-percentage-of-men-and-women-through-different-classes-who-survived"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="11.-Investigating-whether-if-you-are-traveling-alone-or-with-family-would-affect-the-survival-rate.">
+<a id="11-investigating-whether-if-you-are-traveling-alone-or-with-family-would-affect-the-survival-rate" class="anchor" href="#11-investigating-whether-if-you-are-traveling-alone-or-with-family-would-affect-the-survival-rate" aria-hidden="true"><span class="octicon octicon-link"></span></a>11. Investigating whether if you are traveling alone or with family would affect the survival rate.<a href="#11.-Investigating-whether-if-you-are-traveling-alone-or-with-family-would-affect-the-survival-rate."></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [23]:</div>
+<div>
+    <div>
+<div><pre>##Number of passengers who are not travelling alone
+
+not_alone = (passengerinfo[(passengerinfo['SibSp']&gt;0) | (passengerinfo['Parch']&gt;0)])
+
+##Number of passengers who are travelling alone
+
+alone = (passengerinfo[(passengerinfo['SibSp']==0) &amp; (passengerinfo['Parch']==0)])
+
+not_alone_survived = (passengerinfo[((passengerinfo['SibSp']&gt;0) | (passengerinfo['Parch']&gt;0)) &amp; passengerinfo['Survived']])
+alone_survived = (passengerinfo[((passengerinfo['SibSp']==0) &amp; (passengerinfo['Parch']==0)) &amp; passengerinfo['Survived']])
+
+##Percentages of passengers who are travelling alone/are not travelling alone who survived/did not survive
+
+percent_not_alone_survived = len(not_alone_survived)* 1.0/len(not_alone)*100
+percent_alone_survived = len(alone_survived)* 1.0/len(alone)*100
+
+print percent_not_alone_survived
+print percent_alone_survived
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+<div>
+<pre>50.5649717514
+30.3538175047
+</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+<div>In [43]:</div>
+<div>
+    <div>
+<div><pre>##Plotting percentages of passengers who are travelling alone/are not travelling alone who survived/did not survive
+
+
+plotbar(percent_alone_survived, percent_not_alone_survived, 'Percentage of Survivors','black','red',np.arange(0, 70, 10),'Alone','Not Alone')
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div></div>
+
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="Observation:-Percentage-of-survivors-is-more-amongst-people-travelling-in-company">
+<a id="observation-percentage-of-survivors-is-more-amongst-people-travelling-in-company" class="anchor" href="#observation-percentage-of-survivors-is-more-amongst-people-travelling-in-company" aria-hidden="true"><span class="octicon octicon-link"></span></a>Observation: Percentage of survivors is more amongst people travelling in company</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [48]:</div>
+<div>
+    <div>
+<div><pre>import numpy as np
+import scipy
+import scipy.stats
+import pandas
+
+def mann_whitney_test_fmeans():
+    survive = passengerinfo[passengerinfo.Survived == 1]['SibSp']+passengerinfo[passengerinfo.Survived == 1]['Parch']
+    not_survive = passengerinfo[passengerinfo.Survived == 0]['SibSp']+passengerinfo[passengerinfo.Survived == 0]['Parch']
+    survive_mean = np.mean(survive)
+    not_survive_mean = np.mean(not_survive)
+    U,p = scipy.stats.mannwhitneyu(survive,not_survive)
+    return survive_mean, not_survive_mean, U, p
+
+mann_whitney_test_fmeans()
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[48]:</div>
+
+
+<div>
+<pre>(0.9385964912280702, 0.8834244080145719, 77659.0, 3.9854006354579223e-07)</pre>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p>Result:</p>
+<p>P-value:  3.9854006354579223e-07
+Its less than 0.05. This means that the null hypothesis that is rejected. The mean co-passenger value is higher for the survivors.</p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-people-who-travelled-with-company-had-a-higher-survival-rate-than-those-who-did-not.">
+<a id="the-people-who-travelled-with-company-had-a-higher-survival-rate-than-those-who-did-not" class="anchor" href="#the-people-who-travelled-with-company-had-a-higher-survival-rate-than-those-who-did-not" aria-hidden="true"><span class="octicon octicon-link"></span></a>The people who travelled with company had a higher survival rate than those who did not.<a href="#The-people-who-travelled-with-company-had-a-higher-survival-rate-than-those-who-did-not."></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="12.-Data-Visualization">
+<a id="12-data-visualization" class="anchor" href="#12-data-visualization" aria-hidden="true"><span class="octicon octicon-link"></span></a>12. Data Visualization<a href="#12.-Data-Visualization"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="12.1-Age-Distribution-within-classes">
+<a id="121-age-distribution-within-classes" class="anchor" href="#121-age-distribution-within-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>12.1 Age Distribution within classes<a href="#12.1-Age-Distribution-within-classes">;</a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [25]:</div>
+<div>
+    <div>
+<div><pre>##Plotting the age distribution within classes
+
+passengerinfo.Age[passengerinfo.Pclass == 1].plot(kind='kde')    
+passengerinfo.Age[passengerinfo.Pclass == 2].plot(kind='kde')
+passengerinfo.Age[passengerinfo.Pclass == 3].plot(kind='kde')
+ # plots an axis lable
+plt.xlabel("Age")    
+plt.title("Age Distribution within classes")
+# sets our legend for our graph.
+plt.legend(('1st Class', '2nd Class','3rd Class')) 
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[25]:</div>
+
+
+<div>
+<pre>&lt;matplotlib.legend.Legend at 0x20cbcf28&gt;</pre>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div></div>
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-above-graph-is-a-visualization-to-represent-age-distribution-within-classes">
+<a id="the-above-graph-is-a-visualization-to-represent-age-distribution-within-classes" class="anchor" href="#the-above-graph-is-a-visualization-to-represent-age-distribution-within-classes" aria-hidden="true"><span class="octicon octicon-link"></span></a>The above graph is a visualization to represent age distribution within classes<a href="#The-above-graph-is-a-visualization-to-represent-age-distribution-within-classes"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="12.2--Fare-Distribution">
+<a id="122--fare-distribution" class="anchor" href="#122--fare-distribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>12.2  Fare Distribution<a href="#12.2--Fare-Distribution"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+<div>In [26]:</div>
+<div>
+    <div>
+<div><pre>##Plotting fare distribution
+
+passengerinfo['Fare'].plot(kind='hist', figsize=(15,3),bins=100, xlim=(0,50))
+</pre></div>
+
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+
+
+<div>
+<div>Out[26]:</div>
+
+
+<div>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x20680860&gt;</pre>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div></div>
+
+<div>
+<img>
+</div>
+
+<p></p>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<p></p>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="The-above-graph-is-a-visualization-to-represent-fare-distribution">
+<a id="the-above-graph-is-a-visualization-to-represent-fare-distribution" class="anchor" href="#the-above-graph-is-a-visualization-to-represent-fare-distribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>The above graph is a visualization to represent fare distribution<a href="#The-above-graph-is-a-visualization-to-represent-fare-distribution"></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="13.-Conclusion">
+<a id="13-conclusion" class="anchor" href="#13-conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>13. Conclusion<a href="#13.-Conclusion"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h3 id="1.-From-a-total-of-577-male-passengers,-only-109-i.e-less-than-20-percent-survived.-However,-out-of-the-total-314-female-passengers,-233-i.e-upto-74-percent-of-the-female-population-aboard-RMS-Titanic-survived.-The-survival-rate-of-female-passengers-was-much-greater-than-that-of-male-passengers.">
+<a id="1-from-a-total-of-577-male-passengers-only-109-ie-less-than-20-percent-survived-however-out-of-the-total-314-female-passengers-233-ie-upto-74-percent-of-the-female-population-aboard-rms-titanic-survived-the-survival-rate-of-female-passengers-was-much-greater-than-that-of-male-passengers" class="anchor" href="#1-from-a-total-of-577-male-passengers-only-109-ie-less-than-20-percent-survived-however-out-of-the-total-314-female-passengers-233-ie-upto-74-percent-of-the-female-population-aboard-rms-titanic-survived-the-survival-rate-of-female-passengers-was-much-greater-than-that-of-male-passengers" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. From a total of 577 male passengers, only 109 i.e less than 20 percent survived. However, out of the total 314 female passengers, 233 i.e upto 74 percent of the female population aboard RMS Titanic survived. The survival rate of female passengers was much greater than that of male passengers.<a href="#1.-From-a-total-of-577-male-passengers,-only-109-i.e-less-than-20-percent-survived.-However,-out-of-the-total-314-female-passengers,-233-i.e-upto-74-percent-of-the-female-population-aboard-RMS-Titanic-survived.-The-survival-rate-of-female-passengers-was-much-greater-than-that-of-male-passengers."></a>
+</h3>
+<h3 id="2.-A-higher-percentage-of-children-made-it-through-as-compared-to-the-adults.">
+<a id="2-a-higher-percentage-of-children-made-it-through-as-compared-to-the-adults" class="anchor" href="#2-a-higher-percentage-of-children-made-it-through-as-compared-to-the-adults" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. A higher percentage of children made it through as compared to the adults.<a href="#2.-A-higher-percentage-of-children-made-it-through-as-compared-to-the-adults."></a>
+</h3>
+<h3 id="3.-62.96-percent-of-the-1st-class-passengers-survived-whereas,-the-survival-percentage-amongst-the-third-class-passengers-was-only-a-third-of-this.">
+<a id="3-6296-percent-of-the-1st-class-passengers-survived-whereas-the-survival-percentage-amongst-the-third-class-passengers-was-only-a-third-of-this" class="anchor" href="#3-6296-percent-of-the-1st-class-passengers-survived-whereas-the-survival-percentage-amongst-the-third-class-passengers-was-only-a-third-of-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. 62.96 percent of the 1st class passengers survived whereas, the survival percentage amongst the third class passengers was only a third of this.<a href="#3.-62.96-percent-of-the-1st-class-passengers-survived-whereas,-the-survival-percentage-amongst-the-third-class-passengers-was-only-a-third-of-this."></a>
+</h3>
+<h3 id="4.-It-is-observed-that-the-rate-of-survival-is-higher-for-the-passengers-travelling-with-family-as-compared-to-those-travelling-alone.">
+<a id="4-it-is-observed-that-the-rate-of-survival-is-higher-for-the-passengers-travelling-with-family-as-compared-to-those-travelling-alone" class="anchor" href="#4-it-is-observed-that-the-rate-of-survival-is-higher-for-the-passengers-travelling-with-family-as-compared-to-those-travelling-alone" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. It is observed that the rate of survival is higher for the passengers travelling with family as compared to those travelling alone.<a href="#4.-It-is-observed-that-the-rate-of-survival-is-higher-for-the-passengers-travelling-with-family-as-compared-to-those-travelling-alone."></a>
+</h3>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<h2 id="14.-References">
+<a id="14-references" class="anchor" href="#14-references" aria-hidden="true"><span class="octicon octicon-link"></span></a>14. References<a href="#14.-References"></a>
+</h2>
+</div>
+
+<p></p>
+</div>
+</div>
+
+<div>
+<div>
+</div>
+
+<div>
+<div>
+<p><a href="https://www.kaggle.com/c/titanic/prospector#1234">https://www.kaggle.com/c/titanic/prospector#1234</a></p>
+<p><a href="http://www.dataiku.com/blog/2014/05/12/DSS-Titanic-Kaggle-part-1.html">http://www.dataiku.com/blog/2014/05/12/DSS-Titanic-Kaggle-part-1.html</a></p>
+<p><a href="http://cs229.stanford.edu/proj2012/LamTang-TitanicMachineLearningFromDisaster.pdf">http://cs229.stanford.edu/proj2012/LamTang-TitanicMachineLearningFromDisaster.pdf</a></p>
+<p><a href="http://www.anesi.com/titanic.htm">http://www.anesi.com/titanic.htm</a></p>
+<p><a href="https://www.kaggle.com/omarelgabry/titanic/a-journey-through-titanic">https://www.kaggle.com/omarelgabry/titanic/a-journey-through-titanic</a></p>
+<p><a href="https://www.snip2code.com/Snippet/582479/data-science-code">https://www.snip2code.com/Snippet/582479/data-science-code</a></p>
+
+</div>
+
+<p></p>
+</div>
+</div>
+    
+  
+
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/aashika/Investigate-a-dataset">Investigate-a-dataset</a> is maintained by <a href="https://github.com/aashika">aashika</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
